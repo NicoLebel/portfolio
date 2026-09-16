@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>360° Object Detection System — Nicholas Lebel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbfaf7;
+      --surface: #ffffff;
+      --ink: #1a1d22;
+      --ink-soft: #4c5563;
+      --ink-faint: #8a90a0;
+      --line: #e4e1da;
+      --accent: #1f4b7a;
+      --sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      --display: 'Space Grotesk', var(--sans);
+      --mono: 'IBM Plex Mono', monospace;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+    .nav { position: sticky; top: 0; z-index: 20; background: rgba(251,250,247,0.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 16px 28px; display: flex; justify-content: space-between; align-items: center; }
+    .nav-name { font-family: var(--display); font-size: 15px; font-weight: 600; color: var(--ink); }
+
+    .project-header { padding: 32px 0 24px; border-bottom: 1px solid var(--line); }
+    .back-link { font-family: var(--mono); font-size: 13px; color: var(--accent); margin-bottom: 12px; display: inline-block; }
+    h1 { font-family: var(--display); font-size: 32px; margin: 0 0 8px; line-height: 1.2; }
+    .what-is-it { font-size: 18px; color: var(--ink-soft); margin: 0; font-weight: 500; }
+
+    .grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 32px 0; }
+    .left-col { display: flex; flex-direction: column; gap: 24px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 24px; }
+    .card h2 { font-family: var(--display); font-size: 18px; margin: 0 0 12px; color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+    ul { margin: 0; padding-left: 20px; color: var(--ink-soft); }
+    li { margin-bottom: 8px; }
+    .tech-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .pill { font-family: var(--mono); font-size: 12px; background: #e7edf3; color: var(--accent); padding: 4px 10px; border-radius: 4px; }
+
+    .visuals-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+
+    .media-panel-header { display: flex; justify-content: flex-start; align-items: center; width: 100%; }
+    .media-tabs { display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; width: 100%; padding-bottom: 4px; }
+    .tab-btn { font-family: var(--mono); font-size: 11px; background: transparent; border: 1px solid var(--line); color: var(--ink-soft); padding: 5px 10px; border-radius: 4px; cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
+    .tab-btn:hover { background: #f0eee8; color: var(--ink); }
+    .tab-btn.active { background: var(--accent); color: #ffffff; border-color: var(--accent); }
+
+    .media-container { width: 100%; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #000000; min-height: 280px; display: flex; align-items: center; justify-content: center; }
+    .media-item { display: none; width: 100%; height: 100%; }
+    .media-item.active { display: block; }
+    .media-container img { width: 100%; height: auto; display: block; object-fit: cover; }
+
+    .repo-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--ink); color: #ffffff; padding: 12px 20px; border-radius: 6px; font-family: var(--mono); font-size: 14px; font-weight: 500; text-decoration: none; transition: background 0.2s; }
+    .repo-btn:hover { background: var(--accent); text-decoration: none; color: #ffffff; }
+    .repo-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+    footer { padding: 40px 0; font-size: 13px; color: var(--ink-faint); border-top: 1px solid var(--line); margin-top: 40px; }
+
+    @media (max-width: 850px) {
+      .grid-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <span class="nav-name">Nicholas Lebel</span>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="project-header">
+      <a href="index.html" class="back-link">← Engineering Projects</a>
+      <h1>360° Object Detection System</h1>
+      <p class="what-is-it">Embedded C firmware and custom PCB hardware stack designed for an AVR ATmega328P. Features 360-degree ultrasonic detection, custom near-field magnetic coupling wireless data link, FSK modulation algorithm, and tactile touchpad actuator control.</p>
+    </div>
+
+    <div class="grid-layout">
+      <div class="left-col">
+        <div class="card">
+          <h2>Objectives</h2>
+          <ul>
+            <li>Design and develop an ultrasonic object detection system featuring a 360-degree field of view intended for autonomous vehicle navigation.</li>
+            <li>Provide high operator flexibility through tactile user inputs via a touchpad, allowing runtime configuration of sensor tilt angles and selectable scanning/spin modes.</li>
+            <li>Minimize the overall physical footprint and weight profile to ensure seamless integration and portability across compact autonomous platforms.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Outcomes &amp; Contributions</h2>
+          <ul>
+            <li>Designed a custom near-field coupling circuit for wireless data transfer using magnetic fields to bridge rotating top-deck modules with stationary base electronics.</li>
+            <li>Implemented a custom Frequency Shift Keying (FSK) modulation algorithm to convert digital bit streams into analog waveforms for reliable transmission across the wireless link.</li>
+            <li>Designed bidirectional wireless transceiver hardware schematics and implemented layouts on custom printed circuit boards using KiCad.</li>
+            <li>Started the implementation of receiver-side demodulation and bit-detection decoding routines, attempting to establish a framework for robust serial data recovery.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Technical Details &amp; Skills</h2>
+          <ul>
+            <li><strong>Microcontroller:</strong> Bare-metal C development on an AVR ATmega328p utilizing register-level programming.</li>
+            <li><strong>Design Tools:</strong> Circuits simulated initially on LTspice, PCB designed and routed using KiCad.</li>
+            <li><strong>Protocols:</strong> Custom FSK modulation for Digital-to-Analog conversion of binary information into signals, UART telemetry access for debugging.</li>
+            <li><strong>Hardware Systems:</strong> Custom inductor, current amplifier, Hall Effect sensors, ultrasonic sensors, and servo motors were used.</li>
+          </ul>
+          <div class="tech-pills">
+            <span class="pill">Embedded C</span>
+            <span class="pill">ATmega328P</span>
+            <span class="pill">KiCad</span>
+            <span class="pill">FSK Modulation</span>
+            <span class="pill">Wireless Transceivers</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-col">
+        <div class="visuals-card">
+          <div class="media-panel-header">
+            <div class="media-tabs">
+              <button class="tab-btn active" onclick="switchMedia('exploded')">Exploded View</button>
+              <button class="tab-btn" onclick="switchMedia('photo')">Hardware Photo</button>
+              <button class="tab-btn" onclick="switchMedia('pcb')">PCB</button>
+              <button class="tab-btn" onclick="switchMedia('cad')">CAD Model</button>
+            </div>
+          </div>
+
+          <div class="media-container">
+            <div id="media-exploded" class="media-item active">
+              <img src="Exploded_View.png" alt="360 Detection System Exploded View CAD">
+            </div>
+            <div id="media-photo" class="media-item">
+              <img src="D2_Final.png" alt="360 Detection System Hardware Assembly">
+            </div>
+            <div id="media-pcb" class="media-item">
+              <img src="KiCad_Schematic.png" alt="KiCad PCB Schematic Layout">
+            </div>
+            <div id="media-cad" class="media-item">
+              <img src="Prototype.png" alt="360 Detection System CAD Model">
+            </div>
+          </div>
+
+          <a href="https://github.com/NicholasLebel" target="_blank" rel="noopener noreferrer" class="repo-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            View GitHub Repository
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      Built with HTML &amp; CSS · Hosted on GitHub Pages
+    </footer>
+  </div>
+
+  <script>
+    function switchMedia(type) {
+      const explodedItem = document.getElementById('media-exploded');
+      const photoItem = document.getElementById('media-photo');
+      const pcbItem = document.getElementById('media-pcb');
+      const cadItem = document.getElementById('media-cad');
+      const buttons = document.querySelectorAll('.tab-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      if (explodedItem) explodedItem.classList.remove('active');
+      if (photoItem) photoItem.classList.remove('active');
+      if (pcbItem) pcbItem.classList.remove('active');
+      if (cadItem) cadItem.classList.remove('active');
+
+      if (type === 'exploded') {
+        if (explodedItem) explodedItem.classList.add('active');
+        buttons[0].classList.add('active');
+      } else if (type === 'photo') {
+        if (photoItem) photoItem.classList.add('active');
+        buttons[1].classList.add('active');
+      } else if (type === 'pcb') {
+        if (pcbItem) pcbItem.classList.add('active');
+        buttons[2].classList.add('active');
+      } else if (type === 'cad') {
+        if (cadItem) cadItem.classList.add('active');
+        buttons[3].classList.add('active');
+      }
+    }
+  </script>
+
+</body>
+</html>

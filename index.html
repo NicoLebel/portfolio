@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nicholas Lebel — Engineering Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbfaf7;
+      --surface: #ffffff;
+      --ink: #1a1d22;
+      --ink-soft: #4c5563;
+      --ink-faint: #8a90a0;
+      --line: #e4e1da;
+      --accent: #1f4b7a;
+      --accent-soft: #e7edf3;
+      --sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      --display: 'Space Grotesk', var(--sans);
+      --mono: 'IBM Plex Mono', monospace;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    /* Profile Header / Bio Section */
+    .profile-section {
+      padding: 34px 0 30px;
+      display: grid;
+      grid-template-columns: 128px 1fr;
+      gap: 27px;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+    .headshot-container {
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      border: 2px solid var(--line);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .headshot-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .headshot-placeholder {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-faint);
+      text-align: center;
+      padding: 8px;
+    }
+
+    .profile-info h1 {
+      font-family: var(--display);
+      font-size: 31.5px;
+      margin: 0 0 3.5px;
+      line-height: 1.14;
+    }
+    .profile-role {
+      font-family: var(--mono);
+      font-size: 13.5px;
+      color: var(--accent);
+      margin: 0 0 11px;
+    }
+    .profile-bio {
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.54;
+      margin: 0 0 15px;
+    }
+
+    /* Social Icons Row */
+    .social-links {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      padding: 5px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      transition: all 0.2s ease;
+    }
+    .social-icon:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      text-decoration: none;
+    }
+    .social-icon svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* Projects Section (Grid Card Layout) */
+    .section { padding: 30px 0 22px; }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-faint);
+      margin: 0 0 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 19px;
+      padding-bottom: 10px;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 23px 21px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s ease, transform 0.15s ease;
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .project-card h2 {
+      font-family: var(--display);
+      font-size: 18.2px;
+      margin: 0 0 7.5px;
+      white-space: nowrap;
+    }
+    .project-card p {
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin: 0 0 15px;
+      line-height: 1.5;
+    }
+    .tech-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+    .pill {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .context-label-row {
+      margin-bottom: 11px;
+    }
+    .context-label {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 11px;
+      background: #f0f0f0;
+      color: var(--ink-soft);
+      border: 1px solid var(--line);
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .card-link {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    footer {
+      padding: 20px 0 26px;
+      font-size: 12px;
+      color: var(--ink-faint);
+      border-top: 1px solid var(--line);
+      margin-top: 13px;
+    }
+
+    @media (max-width: 650px) {
+      .profile-section { grid-template-columns: 1fr; justify-items: start; gap: 20px; padding: 22px 0; }
+      .headshot-container { width: 110px; height: 110px; }
+      .project-card h2 { white-space: normal; }
+      .section { padding: 20px 0 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <!-- ============ PROFILE / BIO SECTION ============ -->
+    <section class="profile-section">
+      <div class="headshot-container">
+        <img src="headshot.jpeg" alt="Nicholas Lebel Headshot" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div class="headshot-placeholder" style="display: none;">[ Photo Here ]</div>
+      </div>
+      <div class="profile-info">
+        <h1>Nicholas Lebel</h1>
+        <p class="profile-role">Electrical Engineering Student</p>
+        <p class="profile-bio">
+          Electrical Engineering student specializing in embedded C/C++ firmware across STM32 and AVR platforms. Experienced in requirement-driven development and rigorous test engineering, with a growing interest in custom PCB design and robotic systems.
+        </p>
+        
+        <!-- Social / Contact Icons -->
+        <div class="social-links">
+          <!-- Resume Download -->
+          <a href="Resume_Nicholas_Lebel.pdf" target="_blank" class="social-icon" title="Resume PDF">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            Resume
+          </a>
+          <!-- GitHub -->
+          <a href="https://github.com/NicoLebel" target="_blank" class="nav-link social-icon" title="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/nicholas-lebel-8a09a3311" target="_blank" class="social-icon" title="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECT GRID SECTION ============ -->
+    <main class="section">
+      <p class="section-label">Engineering Projects</p>
+
+      <div class="project-grid">
+        <article class="project-card">
+          <div>
+            <h2>Autonomous Robot Embedded Stack</h2>
+            <div class="context-label-row">
+              <span class="context-label">Third Year Design Course</span>
+            </div>
+            <p>Mission tested embedded C firmware stack designed for an AVR ATmega328P. Features an optical FSK module, dynamic PWM actuator control, Finite State Machine architecture, and ROS2 integration with an onboard Linux companion computer.</p>
+            <div class="tech-pills">
+              <span class="pill">Embedded C</span>
+              <span class="pill">ATmega328P</span>
+              <span class="pill">ROS2</span>
+              <span class="pill">FSM</span>
+              <span class="pill">UART</span>
+            </div>
+          </div>
+          <a href="project-01.html" class="card-link">View Project Details →</a>
+        </article>
+
+        <article class="project-card">
+          <div>
+            <h2>360° Object Detection System</h2>
+            <div class="context-label-row">
+              <span class="context-label">Second Year Design Course</span>
+            </div>
+            <p>Embedded C firmware and custom PCB hardware stack designed for an AVR ATmega328P. Features 360-degree ultrasonic detection, custom near-field magnetic coupling wireless data link, FSK modulation algorithm, and tactile touchpad actuator control.</p>
+            <div class="tech-pills">
+              <span class="pill">Embedded C</span>
+              <span class="pill">ATmega328P</span>
+              <span class="pill">KiCad</span>
+              <span class="pill">FSK</span>
+            </div>
+          </div>
+          <a href="project-03.html" class="card-link">View Project Details →</a>
+        </article>
+
+        <article class="project-card">
+          <div>
+            <h2>EV Safety-Critical Firmware</h2>
+            <div class="context-label-row">
+              <span class="context-label">Dalhousie Formula SAE Team</span>
+            </div>
+            <p>CAN network architecture, FSM deadlock safety, and ECU specifications built for an FSAE Electric vehicle. Features hardware watchdog integration, custom DBC generation, and complete VCU technical documentation to baseline safety requirements and accelerate team onboarding.</p>
+            <div class="tech-pills">
+              <span class="pill">C</span>
+              <span class="pill">CAN Bus</span>
+              <span class="pill">STM32F407</span>
+              <span class="pill">System Design</span>
+            </div>
+          </div>
+          <a href="project-02.html" class="card-link">View Project Details →</a>
+        </article>
+      </div>
+    </main>
+
+    <footer>
+      Built with HTML &amp; CSS · Hosted on GitHub Pages
+    </footer>
+
+  </div>
+</body>
+</html>

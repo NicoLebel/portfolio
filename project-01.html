@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autonomous Robot Embedded Stack — Nicholas Lebel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbfaf7;
+      --surface: #ffffff;
+      --ink: #1a1d22;
+      --ink-soft: #4c5563;
+      --ink-faint: #8a90a0;
+      --line: #e4e1da;
+      --accent: #1f4b7a;
+      --sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      --display: 'Space Grotesk', var(--sans);
+      --mono: 'IBM Plex Mono', monospace;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+    .nav { position: sticky; top: 0; z-index: 20; background: rgba(251,250,247,0.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 16px 28px; display: flex; justify-content: space-between; align-items: center; }
+    .nav-name { font-family: var(--display); font-size: 15px; font-weight: 600; color: var(--ink); }
+
+    .project-header { padding: 32px 0 24px; border-bottom: 1px solid var(--line); }
+    .back-link { font-family: var(--mono); font-size: 13px; color: var(--accent); margin-bottom: 12px; display: inline-block; }
+    h1 { font-family: var(--display); font-size: 32px; margin: 0 0 8px; line-height: 1.2; }
+    .what-is-it { font-size: 18px; color: var(--ink-soft); margin: 0; font-weight: 500; }
+
+    .grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 32px 0; }
+    .left-col { display: flex; flex-direction: column; gap: 24px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 24px; }
+    .card h2 { font-family: var(--display); font-size: 18px; margin: 0 0 12px; color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+    ul { margin: 0; padding-left: 20px; color: var(--ink-soft); }
+    li { margin-bottom: 8px; }
+    .tech-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .pill { font-family: var(--mono); font-size: 12px; background: #e7edf3; color: var(--accent); padding: 4px 10px; border-radius: 4px; }
+
+    .visuals-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+
+    .media-panel-header { display: flex; justify-content: flex-start; align-items: center; }
+    .media-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tab-btn { font-family: var(--mono); font-size: 12px; background: transparent; border: 1px solid var(--line); color: var(--ink-soft); padding: 6px 12px; border-radius: 4px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+    .tab-btn:hover { background: #f0eee8; color: var(--ink); }
+    .tab-btn.active { background: var(--accent); color: #ffffff; border-color: var(--accent); }
+
+    .media-container { width: 100%; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #000000; min-height: 280px; display: flex; align-items: center; justify-content: center; }
+    .media-item { display: none; width: 100%; height: 100%; }
+    .media-item.active { display: block; }
+    .media-container img { width: 100%; height: auto; display: block; object-fit: cover; }
+    .media-container video { width: 100%; height: auto; display: block; }
+
+    .repo-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--ink); color: #ffffff; padding: 12px 20px; border-radius: 6px; font-family: var(--mono); font-size: 14px; font-weight: 500; text-decoration: none; transition: background 0.2s; }
+    .repo-btn:hover { background: var(--accent); text-decoration: none; color: #ffffff; }
+    .repo-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+    footer { padding: 40px 0; font-size: 13px; color: var(--ink-faint); border-top: 1px solid var(--line); margin-top: 40px; }
+
+    @media (max-width: 850px) {
+      .grid-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <span class="nav-name">Nicholas Lebel</span>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="project-header">
+      <a href="index.html" class="back-link">← Engineering Projects</a>
+      <h1>Autonomous Robot Embedded Stack</h1>
+      <p class="what-is-it">Mission tested embedded C firmware stack designed for an AVR ATmega328P. Features an optical FSK module, dynamic PWM actuator control, Finite State Machine architecture, and ROS2 integration with an onboard Linux companion computer.</p>
+    </div>
+
+    <div class="grid-layout">
+      <div class="left-col">
+        <div class="card">
+          <h2>Objectives</h2>
+          <ul>
+            <li>Architect non-blocking, bare-metal C firmware for real-time robotic state control, payload capture, and subsystem management.</li>
+            <li>Implement a UART telemetry link for bidirectional communication between microcontroller peripherals and the onboard ROS2 companion computer.</li>
+            <li>Implement an optical FSK module to transmit data by modulating ASCII binary streams into distinct light frequencies for reliable bit detection.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Outcomes &amp; Contributions</h2>
+          <ul>
+            <li>Designed and implemented a Finite State Machine (FSM) architecture to ensure non-blocking subsystem execution and seamless system integration.</li>
+            <li>Established interrupt-driven UART communication between the microcontroller and Linux companion computer, bridging telemetry to custom ROS2 topics.</li>
+            <li>Designed an optical FSK modulation algorithm to toggle light transmission frequencies according to system specifications for wireless message transfer.</li>
+            <li>Designed transistor-based switching driver circuits and configured PWM signals for precise actuator control, including servo positioning and electromagnet activation.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Technical Details &amp; Skills</h2>
+          <ul>
+            <li><strong>Microcontroller Architecture:</strong> Bare-metal C development on an AVR ATmega328P utilizing register-level programming.</li>
+            <li><strong>Hardware Peripherals:</strong> 16-bit PWM for precise servo actuation, 0.3A electromagnets, and 2N2222 BJT switching drivers configured via GPIO pin mapping.</li>
+            <li><strong>Communication &amp; Sensing:</strong> Optical Frequency-Shift Keying (FSK) data transmission via light modulation switching dynamically between 1kHz and 3kHz.</li>
+            <li><strong>System Integration:</strong> Linux companion computer bridging via custom ROS2 UART topics, interfacing directly with the microcontroller through UART interrupt service routines (ISRs).</li>
+          </ul>
+          <div class="tech-pills">
+            <span class="pill">Embedded C</span>
+            <span class="pill">ATmega328P</span>
+            <span class="pill">ROS2</span>
+            <span class="pill">FSM</span>
+            <span class="pill">UART ISR</span>
+            <span class="pill">Timer PWM</span>
+            <span class="pill">Optical FSK</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-col">
+        <div class="visuals-card">
+          <div class="media-panel-header">
+            <div class="media-tabs">
+              <button class="tab-btn active" onclick="switchMedia('photo')">Robot Photo</button>
+              <button class="tab-btn" onclick="switchMedia('video')">Demo Video</button>
+              <button class="tab-btn" onclick="switchMedia('architecture')">System Architecture</button>
+            </div>
+          </div>
+
+          <div class="media-container">
+            <div id="media-photo" class="media-item active">
+              <img src="robot-hardware.jpeg" alt="Autonomous Robot Hardware Assembly">
+            </div>
+            <div id="media-video" class="media-item">
+              <video id="demo-video-player" controls playsinline preload="metadata">
+                <source src="robot-demo.mp4#t=8" type="video/mp4">
+                Your browser does not support playing this video.
+              </video>
+            </div>
+            <div id="media-architecture" class="media-item" style="overflow-y: auto; max-height: 500px;">
+              <div style="display: flex; flex-direction: column; gap: 12px; padding: 10px; background: #000;">
+                <img src="Software.png" alt="Software System Architecture" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                <img src="Hardware.png" alt="Hardware System Architecture" style="width: 100%; height: auto; display: block; object-fit: contain;">
+              </div>
+            </div>
+          </div>
+
+          <a href="https://github.com/JacksonJohnAllanChambers/eced3901-2026-team07" target="_blank" rel="noopener noreferrer" class="repo-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            View GitHub Repository
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      Built with HTML &amp; CSS · Hosted on GitHub Pages
+    </footer>
+  </div>
+
+  <script>
+    function switchMedia(type) {
+      const photoItem = document.getElementById('media-photo');
+      const videoItem = document.getElementById('media-video');
+      const architectureItem = document.getElementById('media-architecture');
+      const videoPlayer = document.getElementById('demo-video-player');
+      const buttons = document.querySelectorAll('.tab-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      if (photoItem) photoItem.classList.remove('active');
+      if (videoItem) videoItem.classList.remove('active');
+      if (architectureItem) architectureItem.classList.remove('active');
+
+      if (type === 'photo') {
+        if (photoItem) photoItem.classList.add('active');
+        buttons[0].classList.add('active');
+        if (videoPlayer) {
+          videoPlayer.pause();
+        }
+      } else if (type === 'video') {
+        if (videoItem) videoItem.classList.add('active');
+        buttons[1].classList.add('active');
+        // If the video hasn't been loaded/played yet or we want to ensure it respects the timestamp:
+        if (videoPlayer && videoPlayer.currentTime < 8) {
+          videoPlayer.currentTime = 8;
+        }
+      } else if (type === 'architecture') {
+        if (architectureItem) architectureItem.classList.add('active');
+        buttons[2].classList.add('active');
+        if (videoPlayer) {
+          videoPlayer.pause();
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
